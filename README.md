@@ -1,7 +1,7 @@
-# Code-Laboration Project
+# Codelaboration Project
 
 ## Description
-Code-Laboration is an interactive tool designed for teachers to present code examples during class. It allows teachers to input lines of code that are displayed in a stacked format, enabling students to follow along easily.
+Code-Laboration is an interactive tool designed for teachers or students to present code examples during class or presentations. It allows the presenter to display lines of code that follows the current of how organic coding flows, enabling audience to follow along easily.
 
 ## Features
 - Input multiple lines of code.
@@ -25,8 +25,8 @@ Enter the desired code in the input area and click the "Add Code" button. The ne
 
 ## Creators
 - Jesus Molina
-- Miguel Villanueva
 - Alex Reyes
+- Miguel Villanueva
 
 ## Contributing
 If you would like to contribute to this project, please follow these steps:
