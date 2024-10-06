@@ -1,0 +1,133 @@
+/* Header CSS */
+header {
+    background-color: #333; 
+    color: white; 
+    padding: 10px 0;
+}
+
+header h1 {
+    text-align: center;
+}
+
+header nav {
+    text-align: center;
+}
+
+/* Footer CSS */
+footer {
+    background-color: #333; 
+    color: white; 
+    padding: 10px 0;
+}
+
+header h1 {
+    text-align: center;
+}
+
+header nav {
+    text-align: center;
+}
+
+/* Main Presentation Window CSS */
+.scroll-window {
+    width: 600px;
+    height: 600px;
+    margin: 20px auto;
+    background-color: #333;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.scroll-window > div {
+    float: left;
+    clear: both;
+}
+
+.scroll-window::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+.scroll-window::-webkit-scrollbar-corner {
+    background-color: transparent;
+}
+
+/* Body Code */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    margin-top: 20px;
+}
+
+.code-container {
+    width: 50%;
+    height: 50%;
+    margin: 20px auto;
+    background-color: #333;
+    border-radius: 10px;
+}
+
+.code-window {
+    width: 90%;
+    height: auto;
+    background-color: #333;
+    color: #fff;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    white-space: pre;
+}
+
+.code-window span.line-number {
+    margin-right: 10px;
+    color: #888;
+}
+
+.buttons,
+.input-box {
+    margin-top: 20px;
+}
+
+.buttons button,
+.input-box button {
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+.buttons button:hover,
+.input-box button:hover {
+    background-color: #0056b3;
+}
+
+.input-box input {
+    padding: 10px;
+    margin: 10px;
+    font-size: 1em;
+    width: 60px;
+    text-align: center;
+}
+
+.hidden-line {
+    cursor: pointer;
+    color: #fff;
+    text-align: left;
+    background-color: #333;
+}

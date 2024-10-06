@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>URL Code Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        input {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        #generated-url {
+            margin-top: 20px;
+            font-size: 18px;
+            word-wrap: break-word; /* To handle long URLs */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>URL Code Generator</h1>
+        <input type="text" id="inputText" placeholder="Enter your text">
+        <button id="generate">Generate URL Code</button>
+        <div id="generated-url"></div>
+    </div>
+    <script>
+        document.getElementById('generate').addEventListener('click', function() {
+            const inputText = document.getElementById('inputText').value;
+
+            if (inputText) {
+                // Generate a URL based on the input text (for example, encoding it)
+                const encodedURL = encodeURIComponent(inputText);
+                const fullURL = `https://example.com/?query=${encodedURL}`; // Replace with your base URL
+                document.getElementById('generated-url').innerHTML = `Generated URL: <a href="${fullURL}" target="_blank">${fullURL}</a>`;
+            } else {
+                alert('Please enter some text');
+            }
+        });
+    </script>
+</body>
+</html>
