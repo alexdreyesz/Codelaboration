@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../codelaboration.css">
+</head>
+
+<!--HEADER-->
+<header>
+    <h1>Codelaboration</h1>
+    <nav>
+      <a href="../index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
+      <a href="../Header Files/about.html" style="color: white; margin: 0 15px; text-decoration: none;">About</a>
+      <a href="../Header Files/contact.html" style="color: white; margin: 0 15px; text-decoration: none;">Contact</a>
+    </nav>
+</header>
+
+<!--ID GENERATOR-->
+<div class="id-generator">
+    <div class="container">
+        <div id="idDisplay" class="id-display">184724</div>
+        <button onclick="generateId()">Generate New ID</button>
+    </div>
+
+    <script>
+        function generateId() {
+            const randomId = Math.floor(100000 + Math.random() * 900000).toString();
+            document.getElementById('idDisplay').textContent = randomId;
+        }
+    </script>
+</div>
+
+<!--BODY-->
+<body>
+
+    <h1>Hello World</h1>
+
+    <div class="scroll-window"> 
+
+        <div class="code-container" id="code_window"> </div>
+
+    </div>
+
+    <div class="buttons">
+        <button onclick="previous_code()"><</button>
+        <button onclick="live_slide()">LIVE</button>
+        <button onclick="next_slide()">></button>
+    </div>
+
+    <div class="input-box">
+        <input type="number" id="num_input" min="1" max="example_lines.length" placeholder="Slide" />
+        <button onclick="jump_line()">Go</button>
+    </div>
+
+    <script>
+        let cur_line_idx = 0;
+        let skip_lines = [];
+        let animation_order = [1, 7, 4, 5, 2, 6]
+
+        const example_lines = [
+            "/*Today We Are Creating Our First Program*/",
+            "#include <stdio.h>",
+            "",
+            "int main() {",
+            "    printf(\"Hello, World!\\n\");",
+            "    return 0;",
+            "}",
+        ];
+
+        function show_code(idx) {
+            const code_window = document.getElementById('code_window');
+            const new_code_line = document.createElement('div');
+            new_code_line.classList.add('code-window');
+            new_code_line.innerHTML = `<span class="line-number">${idx + 1}</span><span>${example_lines[idx]}</span>`;
+            code_window.appendChild(new_code_line);
+            
+            const scroll_window = document.querySelector('.scroll-window');
+            if (code_window.lastChild) {
+                code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                scroll_window.scrollTop = scroll_window.scrollHeight; 
+            }
+        }
+
+        function previous_code() {
+            const code_window = document.getElementById('code_window');
+            if (cur_line_idx > 0) {
+                cur_line_idx--;
+                code_window.removeChild(code_window.lastChild);
+                
+                const scroll_window = document.querySelector('.scroll-window');
+                if (code_window.lastChild) {
+                    code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                    scroll_window.scrollTop = scroll_window.scrollHeight; 
+                }
+            }
+        }
+
+        function next_code() {
+            if (cur_line_idx < example_lines.length) {
+                show_code(cur_line_idx);
+                
+                const scroll_window = document.querySelector('.scroll-window');
+                if (code_window.lastChild) {
+                    code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                    scroll_window.scrollTop = scroll_window.scrollHeight;
+                }
+            }
+        }
+
+        function hide_line() {
+            const code_window = document.getElementById('code_window');
+            skip_lines.forEach(idx => {
+                const secret_line = document.createElement('div');
+                secret_line.classList.add('code-window', 'hidden-line');
+                secret_line.innerHTML = `<span class="line-number">${idx + 1}</span>`;
+                secret_line.onclick = () => show_line(secret_line, idx);
+                code_window.appendChild(secret_line);
+            });
+            skip_lines = [];
+        }
+
+        function show_line(element, idx) {
+            const revealed_line = document.createElement('div');
+            revealed_line.classList.add('code-window');
+            revealed_line.innerHTML = `<span class="line-number">${idx + 1}</span><span>${example_lines[idx]}</span>`;
+            element.replaceWith(revealed_line);
+        }
+
+        function random_norepeat(min, max) {
+        // Create an array with numbers from min to max
+        const numbers = [];
+        for (let i = min; i <= max; i++) {
+            numbers.push(i);
+        }
+
+        // Shuffle the array using Fisher-Yates algorithm
+        for (let i = numbers.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [numbers[i], numbers[j]] = [numbers[j], numbers[i]];
+        }
+
+        // Return a function to get the next random number
+        let index = 0;
+        return function() {
+            if (index < numbers.length) {
+                return numbers[index++];
+            } else {
+                throw new Error("All numbers have been used.");
+            }
+        }
+    }
+
+        function jump_line() {
+            const num_input = document.getElementById('num_input').value;
+            const line_num = parseInt(num_input, 10);
+
+            const code_window = document.getElementById('code_window');
+            code_window.innerHTML = "";
+
+            if (line_num >= 1 && line_num <= example_lines.length) {
+                for (let i = 0; i < line_num - 1; i++) {
+                    skip_lines.push(i);
+                }
+                cur_line_idx = line_num;
+                hide_line();
+                show_code(cur_line_idx - 1);
+            } else {
+                alert("Invalid Line Num " + example_lines.length);
+            }
+        }
+
+        function live_slide() {
+            if (cur_line_idx < animation_order.length) {
+                const line_num = 10
+                cur_line_idx = 9;
+
+                // Create Empty Lines Up To The Current Line Number
+                const code_window = document.getElementById('code_window');
+                while (code_window.children.length < line_num) {
+                    const empty_line = document.createElement('div');
+                    empty_line.classList.add('code-window'); 
+                    empty_line.innerHTML = `<span class="line-number">${code_window.children.length + 1}</span><span></span>`;
+                    code_window.appendChild(empty_line);
+                }
+
+                // Show the text for the current line
+                if (line_num >= 1 && line_num <= example_lines.length) {
+                    const current_line = code_window.children[line_num - 1]; // Access The Correct Line
+                    current_line.children[1].textContent = example_lines[line_num - 1]; // Update The Line With Text
+                } else {
+                    alert("Invalid Line Num " + example_lines.length);
+                }
+
+                cur_line_idx++; // Move To The Next Index
+
+                // Scroll To The Latest Added Line
+                const scroll_window = document.querySelector('.scroll-window');
+                if (code_window.lastChild) {
+                    code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+                    scroll_window.scrollTop = scroll_window.scrollHeight;
+                }
+            }
+        }
+
+        function next_slide() {
+            if (cur_line_idx < animation_order.length) {
+                const line_num = animation_order[cur_line_idx]; // Get The Line Number From The animation_order
+
+                // Create Empty Lines Up To The Current Line Number
+                const code_window = document.getElementById('code_window');
+
+                while (code_window.children.length < line_num) {
+                    const empty_line = document.createElement('div');
+                    empty_line.classList.add('code-window'); 
+                    empty_line.innerHTML = `<span class="line-number">${code_window.children.length + 1}</span><span></span>`;
+                    code_window.appendChild(empty_line);
+                }
+
+                // Show The Text For The Current Line
+                if (line_num >= 1 && line_num <= example_lines.length) {
+                    const current_line = code_window.children[line_num - 1]; // Access The Correct Line
+                    current_line.children[1].textContent = example_lines[line_num - 1]; // Update The Line With Text
+                    
+                    // Scroll the container if the line is not visible
+                    scrollToLineIfNotVisible(current_line);
+                } else {
+                    alert("Invalid Line Num " + example_lines.length);
+                }
+
+                cur_line_idx++; // Move To The Next Index
+            }
+        }
+
+        // Function To Check If A Line Is Visible In The Container And Scroll If Necessary
+        function scrollToLineIfNotVisible(line_element) {
+            const scroll_window = document.querySelector('.scroll-window');
+
+            const containerTop = scroll_window.scrollTop;
+            const containerBottom = containerTop + scroll_window.clientHeight;
+
+            const lineTop = line_element.offsetTop;
+            const lineBottom = lineTop + line_element.offsetHeight;
+
+            // If The Line Is Not Fully Visible In The Container Scroll To It
+            if (lineTop < containerTop || lineBottom > containerBottom) {
+                const scrollTarget = lineTop - (scroll_window.clientHeight) + (line_element.offsetHeight);
+                scroll_window.scrollTo({
+                    top: scrollTarget,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+
+    </script>
+</body>
+
+<!--FOOTER-->
+<footer style="background-color: #333; color: white; text-align: center; padding: 10px 0; position: relative; bottom: 0; width: 100%;">
+    <p>&copy; 2024 Codelaboration. All rights reserved.</p>
+    <nav>
+      <a href="../index.html" style="color: white; margin: 0 10px;">Home</a>
+      <a href="../Header Files/about.html" style="color: white; margin: 0 10px;">About</a>
+      <a href="../Header Files/contact.html" style="color: white; margin: 0 10px;">Contact</a>
+    </nav>
+</footer>
+  
+</html>

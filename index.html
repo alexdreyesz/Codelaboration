@@ -1,215 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="./codelaboration.css">
+
+    <style>
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .home .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .home .box {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            text-align: center;
+            background-color: #fff; 
+        }
+
+        .home .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .home .box:hover {
+            transform: scale(1.05);
+        }
+
+        .home .box:hover img {
+            transform: scale(1.1);
+        }
+
+        .home .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333; 
+            font-weight: bold;
+            font-size: 1.2em; 
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px; 
+            border-radius: 5px; 
+        }
+
+        .home .box img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            display: block; 
+        }
+
+        .home .box {
+            position: relative; 
+        }
+
+        .home .box::before {
+            content: ''; 
+            position: absolute;
+            top: 0; 
+            left: 0;
+            right: 0; 
+            bottom: 0; 
+            background-color: rgba(128, 128, 128, 0.5); 
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .title {
+            text-align: center; 
+            margin: 20px 0; 
+            font-size: 2.5em; 
+            color: #333;
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
+
+    .home > h1 {
+        position: relative; 
+        z-index: 10; 
+    }
+
+    </style>
 </head>
+
 
 <!--HEADER-->
 <header>
     <h1>Codelaboration</h1>
     <nav>
       <a href="./index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
-      <a href="#" style="color: white; margin: 0 15px; text-decoration: none;">About</a>
-      <a href="#" style="color: white; margin: 0 15px; text-decoration: none;">Services</a>
+      <a href="./Header Files/about.html" style="color: white; margin: 0 15px; text-decoration: none;">About</a>
       <a href="./Header Files/contact.html" style="color: white; margin: 0 15px; text-decoration: none;">Contact</a>
     </nav>
 </header>
 
-<!--ID GENERATOR-->
-<div class="id-generator">
+<h1 class="title">Projects</h1>
+
+<div class="home">
+
     <div class="container">
-        <div id="idDisplay" class="id-display">000000</div>
-        <button onclick="generateId()">Generate New ID</button>
+        <a href="./Projects/hello.html" class="box">
+            <img src="./Images/Hello.png" alt="Image 1">
+            <div class="title">Hello World</div>
+        </a>
+        <a href="./Projects/linked.html" class="box">
+            <img src="./Images/Linked.png" alt="Image 2">
+            <div class="title">Linked List</div>
+        </a>
+        <a href="https://link3.com" class="box">
+            <img src="./Images/Queue.png" alt="Image 3">
+            <div class="title">Queue</div>
+        </a>
+        <a href="https://link4.com" class="box">
+            <img src="./Images/Stack.png" alt="Image 4">
+            <div class="title">Stack</div>
+        </a>
+        <a href="https://link5.com" class="box">
+            <img src="./Images/DFS.png" alt="Image 5">
+            <div class="title">DFS</div>
+        </a>
+        <a href="https://link6.com" class="box">
+            <img src="./Images/Dijisktras.png" alt="Image 6">
+            <div class="title">Dijkstra</div>
+        </a>
     </div>
 
-    <script>
-        function generateId() {
-            const randomId = Math.floor(100000 + Math.random() * 900000).toString();
-            document.getElementById('idDisplay').textContent = randomId;
-        }
-    </script>
 </div>
-
-<!--BODY-->
-<body>
-
-    <h1>Linked List</h1>
-
-    <div class="scroll-window"> 
-
-        <div class="code-container" id="code_window"> </div>
-
-    </div>
-
-    <div class="buttons">
-        <button onclick="previous_code()"><</button>
-        <button onclick="next_slide()">></button>
-    </div>
-
-    <div class="input-box">
-        <input type="number" id="num_input" min="1" max="example_lines.length" placeholder="Go to line" />
-        <button onclick="jump_line()">Go</button>
-    </div>
-
-    <script>
-        let cur_line_idx = 0;
-        let skip_lines = [];
-        let animation_order = [4, 2, 6, 7, 11, 8, 9, 10, 1, 3, 5, 12, 13, 14]
-
-        const example_lines = [
-            "/* Example of displayed code */",
-            "#include <stdio.h>",
-            "",
-            "int main() {",
-            "    printf(\"Hello, Computer Science Class!\");",
-            "    return 0;",
-            "}",
-            "",
-            "/* Another example of code */",
-            "#include <stdlib.h>",
-            "int *arr = malloc(sizeof(int) * 5);",
-            "",
-            "",
-            "",
-            "/* Example of displayed code */",
-            "#include <stdio.h>",
-            "",
-            "int main() {",
-            "    printf(\"Hello, Computer Science Class!\");",
-            "    return 0;",
-            "}",
-            "",
-            "/* Another example of code */",
-            "#include <stdlib.h>",
-            "int *arr = malloc(sizeof(int) * 5);"
-        ];
-
-        function show_code(idx) {
-            const code_window = document.getElementById('code_window');
-            const new_code_line = document.createElement('div');
-            new_code_line.classList.add('code-window');
-            new_code_line.innerHTML = `<span class="line-number">${idx + 1}</span><span>${example_lines[idx]}</span>`;
-            code_window.appendChild(new_code_line);
-            
-            const scroll_window = document.querySelector('.scroll-window');
-            if (code_window.lastChild) {
-                code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-                scroll_window.scrollTop = scroll_window.scrollHeight; 
-            }
-        }
-
-        function previous_code() {
-            const code_window = document.getElementById('code_window');
-            if (cur_line_idx > 0) {
-                cur_line_idx--;
-                code_window.removeChild(code_window.lastChild);
-                
-                const scroll_window = document.querySelector('.scroll-window');
-                if (code_window.lastChild) {
-                    code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-                    scroll_window.scrollTop = scroll_window.scrollHeight; 
-                }
-            }
-        }
-
-        function next_code() {
-            if (cur_line_idx < example_lines.length) {
-                show_code(cur_line_idx);
-                
-                const scroll_window = document.querySelector('.scroll-window');
-                if (code_window.lastChild) {
-                    code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-                    scroll_window.scrollTop = scroll_window.scrollHeight;
-                }
-            }
-        }
-
-        function hide_line() {
-            const code_window = document.getElementById('code_window');
-            skip_lines.forEach(idx => {
-                const secret_line = document.createElement('div');
-                secret_line.classList.add('code-window', 'hidden-line');
-                secret_line.innerHTML = `<span class="line-number">${idx + 1}</span>`;
-                secret_line.onclick = () => show_line(secret_line, idx);
-                code_window.appendChild(secret_line);
-            });
-            skip_lines = [];
-        }
-
-        function show_line(element, idx) {
-            const revealed_line = document.createElement('div');
-            revealed_line.classList.add('code-window');
-            revealed_line.innerHTML = `<span class="line-number">${idx + 1}</span><span>${example_lines[idx]}</span>`;
-            element.replaceWith(revealed_line);
-        }
-
-        function jump_line() {
-            const num_input = document.getElementById('num_input').value;
-            const line_num = parseInt(num_input, 10);
-
-            const code_window = document.getElementById('code_window');
-            code_window.innerHTML = "";
-
-            if (line_num >= 1 && line_num <= example_lines.length) {
-                for (let i = 0; i < line_num - 1; i++) {
-                    skip_lines.push(i);
-                }
-                cur_line_idx = line_num;
-                hide_line();
-                show_code(cur_line_idx - 1);
-            } else {
-                alert("Invalid Line Num " + example_lines.length);
-            }
-        }
-
-
-        function next_slide() {
-        if (cur_line_idx < animation_order.length) {
-            const line_num = animation_order[cur_line_idx]; // Get The Line Number From The animation_order
-
-            // Create Empty Lines Up To The Current Line Number
-            const code_window = document.getElementById('code_window');
-            while (code_window.children.length < line_num) {
-                const empty_line = document.createElement('div');
-                empty_line.classList.add('code-window'); 
-                empty_line.innerHTML = `<span class="line-number">${code_window.children.length + 1}</span><span></span>`;
-                code_window.appendChild(empty_line);
-            }
-
-            // Show the text for the current line
-            if (line_num >= 1 && line_num <= example_lines.length) {
-                const current_line = code_window.children[line_num - 1]; // Access The Correct Line
-                current_line.children[1].textContent = example_lines[line_num - 1]; // Update The Line With Text
-            } else {
-                alert("Invalid Line Num " + example_lines.length);
-            }
-
-            cur_line_idx++; // Move To The Next Index
-
-            // Scroll To The Latest Added Line
-            const scroll_window = document.querySelector('.scroll-window');
-            if (code_window.lastChild) {
-                code_window.lastChild.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
-                scroll_window.scrollTop = scroll_window.scrollHeight;
-            }
-        }
-    }
-
-
-    </script>
-</body>
 
 <!--FOOTER-->
 <footer style="background-color: #333; color: white; text-align: center; padding: 10px 0; position: relative; bottom: 0; width: 100%;">
     <p>&copy; 2024 Codelaboration. All rights reserved.</p>
     <nav>
-      <a href="#" style="color: white; margin: 0 10px;">Home</a>
-      <a href="#" style="color: white; margin: 0 10px;">About</a>
-      <a href="#" style="color: white; margin: 0 10px;">Contact</a>
+      <a href="./index.html" style="color: white; margin: 0 10px;">Home</a>
+      <a href="./Header Files/about.html" style="color: white; margin: 0 10px;">About</a>
+      <a href="./Header Files/contact.html" style="color: white; margin: 0 10px;">Contact</a>
     </nav>
 </footer>
-  
+
 </html>
