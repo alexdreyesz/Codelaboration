@@ -37,5 +37,5 @@ If you would like to contribute to this project, please follow these steps:
 5. Open a pull request.
 
 ## Contact
-If you have any questions, feel free to reach out at: [your-email@example.com](mailto:your-email@example.com)
+If you have any questions, feel free to reach out at: [alexdreyesz@gmail.com](mailto:alexdreyesz@gmail.com)
 
