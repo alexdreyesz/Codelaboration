@@ -28,6 +28,50 @@ header nav {
     text-align: center;
 }
 
+/*Id Generator*/
+.id-generator {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    margin: 0;
+}
+
+.id-generator .container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 550px;
+}
+
+.id-generator .id-display {
+    font-size: 36px;
+    color: #333;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    border: 2px solid #e0e0e0;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.id-generator button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.id-generator button:hover {
+    background-color: #45a049;
+}
+
 /* Main Presentation Window CSS */
 .scroll-window {
     width: 600px;
