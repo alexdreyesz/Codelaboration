@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./codelaboration.css">
+
+    <style>
+        .home {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .home .container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            width: 80%;
+            max-width: 1000px;
+        }
+
+        .home .box {
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            transition: transform 0.3s;
+            text-align: center;
+            background-color: #fff; 
+        }
+
+        .home .box img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s;
+        }
+
+        .home .box:hover {
+            transform: scale(1.05);
+        }
+
+        .home .box:hover img {
+            transform: scale(1.1);
+        }
+
+        .home .title {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #333; 
+            font-weight: bold;
+            font-size: 1.2em; 
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 5px; 
+            border-radius: 5px; 
+        }
+
+        .home .box img {
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover;
+            display: block; 
+        }
+
+        .home .box {
+            position: relative; 
+        }
+
+        .home .box::before {
+            content: ''; 
+            position: absolute;
+            top: 0; 
+            left: 0;
+            right: 0; 
+            bottom: 0; 
+            background-color: rgba(128, 128, 128, 0.5); 
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .title {
+            text-align: center; 
+            margin: 20px 0; 
+            font-size: 2.5em; 
+            color: #333;
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
+
+    .home > h1 {
+        position: relative; 
+        z-index: 10; 
+    }
+
+    </style>
+</head>
+
+
+<!--HEADER-->
+<header>
+    <h1>Codelaboration</h1>
+    <nav>
+      <a href="./index.html" style="color: white; margin: 0 15px; text-decoration: none;">Home</a>
+      <a href="./Header Files/about.html" style="color: white; margin: 0 15px; text-decoration: none;">About</a>
+      <a href="./Header Files/contact.html" style="color: white; margin: 0 15px; text-decoration: none;">Contact</a>
+    </nav>
+</header>
+
+<h1 class="title">Projects</h1>
+
+<div class="home">
+
+    <div class="container">
+        <a href="./Projects/hello.html" class="box">
+            <img src="./Images/Hello.png" alt="Image 1">
+            <div class="title">Hello World</div>
+        </a>
+        <a href="./Projects/linked.html" class="box">
+            <img src="./Images/Linked.png" alt="Image 2">
+            <div class="title">Linked List</div>
+        </a>
+        <a href="./index.html" class="box">
+            <img src="./Images/Queue.png" alt="Image 3">
+            <div class="title">Queue</div>
+        </a>
+        <a href="./index.html" class="box">
+            <img src="./Images/Stack.png" alt="Image 4">
+            <div class="title">Stack</div>
+        </a>
+        <a href="./index.html" class="box">
+            <img src="./Images/DFS.png" alt="Image 5">
+            <div class="title">DFS</div>
+        </a>
+        <a href="./index.html" class="box">
+            <img src="./Images/Dijisktras.png" alt="Image 6">
+            <div class="title">Dijkstra</div>
+        </a>
+    </div>
+
+</div>
+
+<!--FOOTER-->
+<footer style="background-color: #333; color: white; text-align: center; padding: 10px 0; position: relative; bottom: 0; width: 100%;">
+    <p>&copy; 2024 Codelaboration. All rights reserved.</p>
+    <nav>
+      <a href="./index.html" style="color: white; margin: 0 10px;">Home</a>
+      <a href="./Header Files/about.html" style="color: white; margin: 0 10px;">About</a>
+      <a href="./Header Files/contact.html" style="color: white; margin: 0 10px;">Contact</a>
+    </nav>
+</footer>
+
+</html>
