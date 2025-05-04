@@ -1,4 +1,4 @@
-# 💻 Welcome to Code-Laboration – A Live Code Presentation Tool  
+# 💻 Welcome to Codelaboration – A Live Code Presentation Tool  
 React | Tailwind | Typescript | Node.js |
 
 Hello! This is the showcase for **Code-Laboration**, an interactive tool I co-developed for presenting code during lectures or live sessions. It’s designed to mimic the natural flow of live coding, helping audiences follow along more effectively.
